@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 
+<?php $count = 0; ?>
+
 <html>
 
     <head>
@@ -48,18 +50,45 @@
             <div class="containers">
                     <div id="events">
                         <h2>Evènements</h2>
-                         <div class="row">
-                            <div class=" col-xs-4 col-md-4">
-                                <img src="img/photo-gagnante.jpg" alt="Etudiant du CESI">
-                            </div>
-                            <div class=" col-xs-4 col-md-4">
-                                <img src="img/photo-gagnante.jpg" alt="Etudiant du CESI">
-                            </div>
-                            <div class=" col-xs-4 col-md-4">
-                                <img src="img/photo-gagnante.jpg" alt="Etudiant du CESI">
-                            </div>
-                        </div>
+                        <?php
+
+                            $bdd = new PDO('mysql:host=localhost; dbname=projet_test_bdd; charset=utf8', 'root','');
+
+                            $events = $bdd->prepare('SELECT * FROM bai');
+                            $events -> execute();
+
+                            while ($answer = $events->fetch()){
+                                    echo "<div class='col-xs-4 col-md-4'>"; ?>
+                                    <img src= <?php echo $answer['urlImage'] ?> , class='prodpic' height='100' lenght='100'/>
+                                    <div class='descri'>
+                                        <label>Nom de l'évènement:</label> <?php echo $answer['nom_event']; ?>
+                                    </div>
+
+                                    <div class='descri'> 
+                                        <label>Date:</label> <?php echo $answer['date_event']; ?> 
+                                    </div>
+
+                                    <div class='descri'> 
+                                        <label>Description:</label>  <?php echo $answer['description']; ?>      
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <img src="img/thumb-up.png" alt="Like" >
+                                    </div>
+                                    <div class="col-md-2">
+                                        <img src="img/download.png" alt="Like">
+                                    </div>
+                                    </div> 
+                                <?php
+                                $count += 1; 
+
+                                if ($count == 3) {
+                                    break;
+                                }
+                                
+                            };?>
                     </div>
+                    
                     <div id="article">
                         <h2>Articles recommandées</h2>
                          <div class="row">
