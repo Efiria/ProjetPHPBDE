@@ -1,0 +1,98 @@
+
+header {
+
+  position: relative;
+  height: 250px;
+  background-image: linear-gradient(#f1360e, #fe7456);
+  border-bottom-left-radius: 20% 10%;
+  border-bottom-right-radius: 20% 10%;
+}
+
+#titre h1 {
+
+  margin: 0;
+  padding: 60px 0;
+  color: white;
+  font: 44px "helvetica";
+  text-align: center;
+  text-decoration: none;
+}
+
+nav {
+
+  margin: 0;
+  font: 25px "helvetica";
+  text-align: center;
+}
+
+#logo img {
+  margin-left: 60px;
+  margin-top: 20px;
+  width: 65%;
+}
+
+#select a {
+
+  padding: 0px 15px;
+  color: white;
+  text-decoration: none;
+}
+
+#select a:hover {
+
+  text-shadow: 2px 2px 2px black;
+}
+
+.menu li {
+  display: inline;
+}
+
+.menu li a {
+  padding: 10px 10px;
+}
+
+.products{
+  margin-top: 30px;
+  text-align: center;
+}
+
+.displayprod {
+  display: inline-flex;
+}
+
+.description {
+  width: 200px;
+}
+
+.price {
+  padding: 0px 10px 0px 10px;
+}
+
+
+.containers {
+  max-width: 1140px;
+  padding: 0px;
+  margin: 0px auto;
+  position: relative;
+}
+
+.copyright-wrapper {
+    font: 14px "helvetica";
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.col-md-4{
+  border: 3px solid red;
+  border-radius: 10px;
+  padding: 10px;
+  background: #FFFFFF;
+  display: block;
+  text-align: center;
+  width: 31.333% !important;
+  margin: 0.5% 0.5% !important;
+}
