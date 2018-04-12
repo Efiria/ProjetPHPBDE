@@ -3,8 +3,11 @@ CREATE TABLE IF NOT EXISTS utilisateurs
 (
 	ID INT unsigned NOT NULL AUTO_INCREMENT,
 	nom VARCHAR(40),
+	prenom VARCHAR(40),
+	identifiant VARCHAR(40),
 	mdp VARCHAR(255),
 	email VARCHAR(255),
+	numero INT(11),
 	status INT(11),
 	PRIMARY KEY (ID)
 );
@@ -45,12 +48,10 @@ CREATE TABLE IF NOT EXISTS BAI
 	ID INT unsigned NOT NULL AUTO_INCREMENT,
 	nom_event VARCHAR (40),
 	date_event DATE,
-	/*FK_Utilisateur INT unsigned NOT NULL,*/
 	description VARCHAR(255),
 	urlImage VARCHAR(255) DEFAULT 'img/Produits/1.jpg',
 	status VARCHAR (40),
 	PRIMARY KEY (ID)
-	/*FOREIGN KEY(FK_Utilisateur) REFERENCES utilisateurs(ID)*/
 );
 
 

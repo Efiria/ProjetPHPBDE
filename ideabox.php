@@ -1,58 +1,93 @@
 <!DOCTYPE html>
 	<html>
+
 		<head>
 			<?php include "includes/header.php"; ?>
 		</head>
 	<body>
-		<div id="corps">
-	        <div class="container">   
-		        <section>  
-					<div id="container" >
-						<div id="wrapper">
-							<div class="animate form">
-								<form  method="post" action="scriptIdeabox.php" autocomplete="on">
-									
-					                <p><label for="add_categorie" class="your_event">Nom de l'évènement :</label></p>
-									<p>
-										<input id="add_categorie" name="nom_event" required="required" type="text"/> 
-									</p>
-									
-
-									<p><label for="add_eventdate" class="your_date_event">Date :</label></p>
-									<p><input id="add_eventdate" name="date_event" required="required" type="text" placeholder="YYYY-MM-DD"/></p>
-
-									<p><label for="add_description" class="your_description">Description :</label></p>
-									<p><textarea id="add_description" name="description" required="required" cols="100" rows="20"></textarea></p>
-
-										<div class="animate form">
-		              					 	 <p id="test">
-												<input type="submit" value="Poster" onclick="myFunction()"/>
-		               					 	 </p>
-										</div>
-					            </form>
-							</div>
-						</div>
-					</div>
-				</section>
-	        </div>
-    	</div>
+		       <div class="containers">
+                    <div id="AddEvent">
+                    	<h2>Evènements</h2>
+                    	 <p class="addButton"> 
+                    		<a href="addEvent.php"> <button>Proposer</button></a> 
+     					</p>
+                         <div class="row">
+                            <div class=" col-xs-4 col-md-4">
+                                <img src="img/Katakuri.png" alt="Etudiant Exia">
+                                <div class="row">
+                                	<div class="col-md-2">
+                                		<img src="img/thumb-up.png" alt="Like">
+                                	</div>
+                                	<div class="col-md-2">
+                                		<img src="img/download.png" alt="Like">
+                                	</div>
+                                </div>
+                            </div>
+                            <div class=" col-xs-4 col-md-4">
+                                 <img src="img/Katakuri.png" alt="Etudiant Exia">
+                                <div class="row">
+                                	<div class="col-md-2">
+                                		<img src="img/thumb-up.png" alt="Like">
+                                	</div>
+                                	<div class="col-md-2">
+                                		<img src="img/download.png" alt="Like">
+                                	</div>
+                                </div>
+                            </div>
+                            <div class=" col-xs-4 col-md-4">
+                                 <img src="img/Katakuri.png" alt="Etudiant Exia">
+                                <div class="row">
+                                	<div class="col-md-2">
+                                		<img src="img/thumb-up.png" alt="Like">
+                                	</div>
+                                	<div class="col-md-2">
+                                		<img src="img/download.png" alt="Like">
+                                	</div>
+                                </div>
+                            </div>
+                              <div class=" col-xs-4 col-md-4">
+                                 <img src="img/Katakuri.png" alt="Etudiant Exia">
+                                <div class="row">
+                                	<div class="col-md-2">
+                                		<img src="img/thumb-up.png" alt="Like">
+                                	</div>
+                                	<div class="col-md-2">
+                                		<img src="img/download.png" alt="Like">
+                                	</div>
+                                </div>
+                            </div>
+                            <div class=" col-xs-4 col-md-4">
+                                 <img src="img/Katakuri.png" alt="Etudiant Exia">
+                                <div class="row">
+                                	<div class="col-md-2">
+                                		<img src="img/thumb-up.png" alt="Like">
+                                	</div>
+                                	<div class="col-md-2">
+                                		<img src="img/download.png" alt="Like">
+                                	</div>
+                                </div>
+                            </div>
+                            <div class=" col-xs-4 col-md-4">
+                                <img src="img/Nathanael.jpg" alt="Etudiant Exia">
+                                <div class="row">
+                                	<div class="col-md-2">
+                                		<img src="img/thumb-up.png" alt="Like">
+                                	</div>
+                                	<div class="col-md-2">
+                                		<img src="img/download.png" alt="Like">
+                                	</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
 	</body>
 
-<footer class="copyright-wrapper">
+	<footer class="copyright-wrapper">
     <?php include("footer.php"); ?>
-</footer>
-
-<script>
-function myFunction() {
-	var session='<?PHP echo $_SESSION['status'];?>';
-	if(session=true)
-	{
-		var answer = "<?php require('scriptIdeabox.php')?>";
-		alert(answer);
-   
-	}
-}
-
-</script>
+	</footer>
 
 </html>
+
+ 
+	
