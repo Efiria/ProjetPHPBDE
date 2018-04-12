@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<?php include 'includes/header.php'; ?>
-		<title>Site E-Commerce</title>
+		<title>Site Boutique</title>
 	</head>
 
 	<body>
