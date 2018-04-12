@@ -48,15 +48,20 @@ if (isset($_SESSION['status']) && $_SESSION['status'] >= 1 ){
     <form method="post" action="ajoutProduit.php" autocomplete="on">
         <h1>Ajouter un Produit</h1> 
         <p> 
-	     <label for="nomProd" class="nomProd" data-icon="u" >Nom du produit : </label>
-	     <input id="nomProd" name="nomProd" required="required" type="text" placeholder=" Nom "/>
+	     <label for="nomProduit" class="nomProduct" data-icon="u" >Nom du produit : </label>
+	     <input id="nomProduit" name="nomProd" required="required" type="text" placeholder=" Nom "/>
+        </p>
+        
+        <p> 
+	     <label for="prixProd" class="prixProd" data-icon="u" >Prix du produit : </label>
+	     <input id="prixProd" name="prixProd" required="required" type="text" placeholder=" Prix "/>
         </p>
 
         <p> 
-        <label for="descProd" class="descProd" data-icon="p">Description produit : </label>
-        <input id="descProd" name="descProd" required="required" type="text" placeholder=" description " /> 
+        <label for="descProd" class="descProd" data-icon="p">Description produit : </label> </br>
+        <textarea id="descProd" name="descProd" required="required" cols="50" rows="10"></textarea>
         </p>
-
+        
         <p> 
         <label for="cateProd" class="cateProd" data-icon="p">Catégorie du produit : </label>
         <input id="cateProd" name="cateProd" required="required" type="text" placeholder=" catégorie " /> 
