@@ -25,14 +25,15 @@ if (isset($_SESSION["panier"]))
 }
 
 while ($answer = $products->fetch()){
-	echo "<ul class='displayprod'>"; ?>
+	echo "<div class='displayprod'>"; ?>
 	<img src= <?php echo $answer['urlImage'] ?> , class='prodpic' height='100' lenght='100'/>
+    <div class='nomProd'> <?php echo $answer['nom'] ?></div>
 	<div class='price'> <?php echo $answer['prix']; ?> € </div>
 	<div class='description'> <?php echo $answer['description']; ?> </div>
 	<div class='stock'> stock :  <?php echo $answer['stock']; ?></div>
     <?php if(isset($_SESSION['status']) && $_SESSION['status'] >= 0 ){ ?>
-	<a href="shop.php?addProduct=<?php echo $answer['nom']?>">Ajouter produit</a>
-	</ul> 
+	<a href="shop.php?addProduct=<?php echo $answer['nom']?>">Ajouter au panier</a>
+	</div> 
 
 	<?php }
 };
@@ -79,13 +80,13 @@ if (isset($_SESSION['status']) && $_SESSION['status'] >= 1 ){
 </div>
 
 <div id="supprimer">
-    <form method="post" action="supprimerProduc.php" autocomplete="on">                         <h1>Supprimer un Produit</h1> 
+    <form method="post" action="suppProduit.php" autocomplete="on">                         
+        <h1>Supprimer un Produit</h1> 
         <p> 
-	    <label for="nomProd" class="nomProd" data-icon="u" >Nom du Produit: </label>
+	    <label for="nomProds" class="nomProds" data-icon="u" >Nom du Produit: </label>
 	    <input id="nomProd" name="nomProd" required="required" type="text" placeholder="nom"/>
         </p>
-
-                            
+        
         <p class="supprimer button"> 
         <input type="submit" value="Supprimer" /> 
         </p>
