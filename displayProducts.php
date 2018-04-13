@@ -31,6 +31,10 @@ if(isset($_POST['query'])){
     $products = $bdd->prepare('SELECT * FROM produits');
     $products -> execute();
 }
+           
+if(isset($search)){
+    ?><a href="shop.php">enlever filtre <?php echo $search ?> </a></br> <?php
+}
 
 
 //Create panier
