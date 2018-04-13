@@ -62,6 +62,7 @@ while ($answer = $products->fetch()){
 	<div class='stock'> stock :  <?php echo $answer['stock']; ?></div>
     <?php if(isset($_SESSION['status']) && $_SESSION['status'] >= 0 ){ ?>
 	<a href="shop.php?addProduct=<?php echo $answer['nom']?>">Ajouter au panier</a>
+    <div> catégorie : <?php echo $answer['categorie']; ?></div>
 	</div> 
 
 	<?php }
@@ -77,7 +78,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] >= 1 ){
     <!-- Ajouter -->
 
     <div id="ajouter">
-        <form method="post" action="ajoutProduit.php" autocomplete="on">
+        <form method="post" action="ajoutProduit.php" autocomplete="on" enctype="multipart/form-data">
             <h1>Ajouter un Produit</h1> 
             <p> 
              <label for="nomProduit" class="nomProduct" data-icon="u" >Nom du produit : </label>
