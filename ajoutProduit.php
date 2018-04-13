@@ -21,6 +21,11 @@
         ?> <script> alert ()"L'image existe deja"); </script> <?php
     }
 
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+       && $imageFileType != "gif" ) {
+        echo "Seulement des images merci :) ";
+    }
+
     if (move_uploaded_file($_FILES["imgProd"]["tmp_name"], $fichier)) {
         echo "L'image ". basename( $_FILES["imgProd"]["name"]). " a été ajouté.";
     } else {
@@ -42,6 +47,6 @@
         $ajoutProd_insert->execute() or die ('pb insert');
     }
 
-   header("Location: shop.php");	
+    header("Location: shop.php");	
     
 ?>
