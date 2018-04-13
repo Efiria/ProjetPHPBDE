@@ -3,22 +3,19 @@
 
 		<head>
 			<?php include "includes/header.php"; ?>
-            <script type="text/javascript" src="js_valider.js"></script>
-            <script type="text/javascript" src="jquery-3.3.1.js"></script>
 		</head>
 	<body>
 		       <div class="containers">
                     <div id="AddEvent">
-                    	<h2>Nos idées</h2>
+                    	<h2>Evènements</h2>
                     	 <p class="addButton"> 
-                    		<a href="addEvent.php"> <button>Proposer</button></a> 
      					</p>
                          <div class="row">
                             <?php
 
                             $bdd = new PDO('mysql:host=localhost; dbname=projet_test_bdd; charset=utf8', 'root','');
 
-                            $events = $bdd->prepare('SELECT * FROM bai WHERE etat != "valider"');
+                            $events = $bdd->prepare('SELECT * FROM bai WHERE etat != "attente"');
                             $events -> execute();
 
                             while ($answer = $events->fetch()){
@@ -33,7 +30,7 @@
                                     <label>Date:</label> <?php echo $answer['date_event']; ?> 
                                 </div>
 
-                                 <div class='descri'> 
+                                <div class='descri'> 
                                     <label>Description:</label> 
                                     <?php 
                                     $longueur = $answer['description'];
@@ -49,12 +46,18 @@
                                     ?>      
                                 </div>
 
-                                <div class="col-md-2">
-                                   <img src="img/thumbs-0.png" onClick=changelike(this) alt="Like" >
+                                <div class="col-md-1">
+                                    <img src="img/thumbs-0.png" onClick=changelike(this) alt="Like" >
                                 </div>
-                                 <div class="col-md-2">
-                                    <img src="img/checked(1).png" onClick=changecheck(this) alt="Valider" >
-                                </div>                       
+                                <div class="col-md-1">
+                                    <img src="img/report.png" alt="Like">
+                                </div>
+                                <div class="col-md-1">
+                                    <img src="img/download-arrow.png" onClick=changeimg(this) alt="Like" >
+                                </div>
+                                <div class="col-md-1">
+                                    <img src="img/settings.png" alt="Like">
+                                </div>
                                 </div> 
                                 <?php
                             };?>
@@ -66,4 +69,29 @@
 	<footer class="copyright-wrapper">
     <?php include("footer.php"); ?>
 	</footer>
-</html>	
+
+  <script type="text/javascript">
+
+
+function changeimg(myImage) {
+ 
+            var ancimage = myImage.src;
+ 
+            if( ancimage.substring(ancimage.lastIndexOf("/"), ancimage.length) == "/thumbs-0.png"){
+                myImage.src= ancimage.substring(0,ancimage.lastIndexOf("/"), ancimage.length)+"/thumbs-1.png";
+ 
+             } 
+             else{
+                myImage.src= ancimage.substring(0,ancimage.lastIndexOf("/"), ancimage.length)+"/thumbs-0.png";
+ 
+ 
+             }
+        }
+</script>
+
+</html>
+
+
+
+ 
+	
