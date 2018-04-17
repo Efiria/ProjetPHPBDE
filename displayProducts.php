@@ -33,7 +33,7 @@ if(isset($_POST['query'])){
 }
            
 if(isset($search)){
-    ?><a href="shop.php">enlever filtre <?php echo $search ?> </a></br> <?php
+    ?><a href="shop.php">enlever filtre <?php echo $search ?> </a> </br> <?php
 }
 
 
@@ -45,7 +45,11 @@ if (isset($_GET["addProduct"]))
   	{
     	$_SESSION["panier"] = array();
   	}
-  		array_push($_SESSION["panier"], $_GET["addProduct"]);
+    //Ajout dans le panier
+    array_push($_SESSION["panier"], $_GET["addProduct"]);
+    $pushPanier = $bdd->prepare("INSERT INTO commandes (idProduit) VALUES ( :idprod)");
+    $pushPanier->bindValue(':idprod', $_GET['addProduct'], PDO::PARAM_INT);
+    $pushPanier -> execute() or die('error');
 }
 
 if (isset($_SESSION["panier"]))
@@ -135,7 +139,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] >= 1 ){
 
     <div id="stock">
         <form method="post" action="stockProduit.php" autocomplete="on">                         
-            <h2>Stock un Produit</h2> 
+            <h2>Stock d'un Produit</h2> 
             <p> 
             <label for="nomProds" class="nomProds" data-icon="u" >Nom du Produit: </label>
             <input id="nomProd" name="nomProd" required="required" type="text" placeholder="nom"/>
