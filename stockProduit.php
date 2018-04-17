@@ -2,11 +2,11 @@
 
     $bdd = new PDO('mysql:host=localhost;dbname=projet_test_bdd;charset=utf8', 'root', '');
 
-    $nomProd = $_POST['nomProds'];
-    $stockProd = $_POST['stockProds'];
+    $nomProd = $_POST['nomProd'];
+    $stockProd = $_POST['stockProd'];
     
-    $requete = $bdd->prepare("SELECT nom FROM produits WHERE nom = '$nomProd' ");
-    //$requete->bindValue(':nom', $nomProd);
+    $requete = $bdd->prepare("SELECT nom FROM produits WHERE nom = :nom ");
+    $requete->bindValue(':nom', $nomProd);
     $requete->execute();
 
 

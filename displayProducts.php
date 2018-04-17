@@ -62,35 +62,35 @@ if (isset($_SESSION["panier"]))
 
 <div id="article">
     <h2>Articles recommandées</h2>
-    <div class="row">
-        <?php
-            while ($answer = $products->fetch()){
-            ?>
-            <div class='col-xs-4 col-md-4'>
-            <img src= <?php echo $answer['urlImage'] ?> , class='prodpic' height='100' lenght='100'/>
-            <div class='nom'>
-            <label>Nom:</label> <?php echo $answer['nom']; ?>
-            </div>
-            <div class='prix'>
-            <label>Prix:</label> <?php echo $answer['prix']; ?> €
-            </div>
-            <div class='descri'> 
-            <label>Description:</label> <?php echo $answer['description']; ?> 
-            </div>
-            <div class='categ'> 
-            <label>Catégorie:</label> <?php echo $answer['categorie']; ?> 
-            </div>
-            <div class='stock'> 
-            <label>Stock:</label>  <?php echo $answer['stock']; ?>      
-            </div> 
-            <div class="ajout">
-            <a href="shop.php?addProduct=<?php echo $answer['nom']?>">Ajouter au panier</a>
-            </div>
-            </div>                      
+                         <div class="row">
+                                <?php
+                                    $bdd = new PDO('mysql:host=localhost; dbname=projet_test_bdd; charset=utf8', 'root','');
+                                    $products = $bdd->prepare('SELECT * FROM produits');
+                                    $products -> execute();
+                                        while ($answer = $products->fetch()){
+                                        ?>
+                                        <div class='col-xs-4 col-md-4'>
+                                            <img src= <?php echo $answer['urlImage'] ?> , class='prodpic' height='100' lenght='100'/>
+                                            <div class='nom'>
+                                                <label>Nom:</label> <?php echo $answer['nom']; ?>
+                                            </div>
+                                            <div class='prix'>
+                                                <label>Prix:</label> <?php echo $answer['prix']; ?> €
+                                            </div>
+                                            <div class='descri'> 
+                                                <label>Description:</label> <?php echo $answer['description']; ?> 
+                                            </div>
+                                            <div class='stock'> 
+                                                <label>Stock:</label>  <?php echo $answer['stock']; ?>      
+                                            </div> 
+                                            <div class="ajout">
+                                                 <a href="shop.php?addProduct=<?php echo $answer['nom']?>">Ajouter au panier</a>
+                                            </div>
+                                            </div>                      
    
-            <?php };?> 
-            </div>
-        </div>
+                               <?php };?> 
+                        </div>
+                    </div>
 <?php
 $products -> closeCursor();
 
@@ -142,7 +142,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] >= 1 ){
             <h2>Stock d'un Produit</h2> 
             <p> 
             <label for="nomProds" class="nomProds" data-icon="u" >Nom du Produit: </label>
-            <input id="nomProds" name="nomProds" required="required" type="text" placeholder="nom"/>
+            <input id="nomProd" name="nomProd" required="required" type="text" placeholder="nom"/>
             </p>
             
              <p> 
@@ -150,8 +150,8 @@ if (isset($_SESSION['status']) && $_SESSION['status'] >= 1 ){
             <input id="stockProds" name="stockProds" required="required" type="text" placeholder="stock"/>
             </p>
 
-            <p class="ajouter button"> 
-            <input type="submit" value="Ajouter" /> 
+            <p class="supprimer button"> 
+            <input type="submit" value="Supprimer" /> 
             </p>
 
         </form>
