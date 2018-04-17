@@ -49,25 +49,38 @@ if (isset($_SESSION["panier"]))
 	$panier_count = sizeof($_SESSION["panier"]);
 }
 
-
-
 //Display Product 
+?>
 
-while ($answer = $products->fetch()){
-	echo "<div class='displayprod'>"; ?>
-	<img src= <?php echo $answer['urlImage'] ?> , class='prodpic' height='100' lenght='100'/>
-    <div class='nomProd'> <?php echo $answer['nom'] ?></div>
-	<div class='price'> <?php echo $answer['prix']; ?> € </div>
-	<div class='description'> <?php echo $answer['description']; ?> </div>
-	<div class='stock'> stock :  <?php echo $answer['stock']; ?></div>
-    <?php if(isset($_SESSION['status']) && $_SESSION['status'] >= 0 ){ ?>
-	<a href="shop.php?addProduct=<?php echo $answer['nom']?>">Ajouter au panier</a>
-    <div> catégorie : <?php echo $answer['categorie']; ?></div>
-	</div> 
-
-	<?php }
-};
-
+<div id="article">
+    <h2>Articles recommandées</h2>
+                         <div class="row">
+                                <?php
+                                    $bdd = new PDO('mysql:host=localhost; dbname=projet_test_bdd; charset=utf8', 'root','');
+                                    $products = $bdd->prepare('SELECT * FROM produits');
+                                    $products -> execute();
+                                        while ($answer = $products->fetch()){
+                                        ?>
+                                        <div class='col-xs-4 col-md-4'>
+                                            <img src= <?php echo $answer['urlImage'] ?> , class='prodpic' height='100' lenght='100'/>
+                                            <div class='prix'>
+                                                <label>Prix:</label> <?php echo $answer['prix']; ?> €
+                                            </div>
+                                            <div class='descri'> 
+                                                <label>Description:</label> <?php echo $answer['description']; ?> 
+                                            </div>
+                                            <div class='stock'> 
+                                                <label>Stock:</label>  <?php echo $answer['stock']; ?>      
+                                            </div> 
+                                            <div class="ajout">
+                                                 <a href="shop.php?addProduct=<?php echo $answer['nom']?>">Ajouter au panier</a>
+                                            </div>
+                                            </div>                      
+   
+                               <?php };?> 
+                        </div>
+                    </div>
+<?php
 $products -> closeCursor();
 
 

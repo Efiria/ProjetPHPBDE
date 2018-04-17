@@ -15,7 +15,7 @@
         echo "<script type='text/javascript'>alert('Ce produit n\'existe pas')</script>";
         
     }else{
-        $req = "UPDATE produits SET stockProd = ':stockProd' WHERE nom = '$nomProd' ";
+        $req = "UPDATE produits SET stock = :stockProd WHERE nom = '$nomProd' ";
         $ajoutProd_insert = $bdd ->prepare($req);
         $ajoutProd_insert->bindValue(':stockProd',  $stockProd, PDO::PARAM_INT);
         $ajoutProd_insert->execute() or die ('pb insert');
