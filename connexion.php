@@ -13,7 +13,7 @@
                     <div id="wrapper">
                         <div id="login" class="animate form">
                             <form method="post" action="scriptConnexion.php" autocomplete="on">
-                                <h2>Identifiez-vous</h2>  
+                                <h1>Identifiez-vous</h1>  
                                     <label for="idsignup" class="yourid"  >Identifiant </label>
                                 <p>
                                     <input id="idsignup" name="identifiant" required="required" type="text" />

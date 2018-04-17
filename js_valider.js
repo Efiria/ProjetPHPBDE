@@ -10,7 +10,6 @@ function changelike(myImage_like) {
              else{
                 myImage_like.src= ancimage.substring(0,ancimage.lastIndexOf("/"), ancimage.length)+"/thumbs-0.png";
              }
-
         }
 
 function changecheck(myImage_check) {
