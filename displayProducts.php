@@ -63,6 +63,9 @@ if (isset($_SESSION["panier"]))
                                         ?>
                                         <div class='col-xs-4 col-md-4'>
                                             <img src= <?php echo $answer['urlImage'] ?> , class='prodpic' height='100' lenght='100'/>
+                                            <div class='nom'>
+                                                <label>Nom:</label> <?php echo $answer['nom']; ?>
+                                            </div>
                                             <div class='prix'>
                                                 <label>Prix:</label> <?php echo $answer['prix']; ?> €
                                             </div>
@@ -92,7 +95,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] >= 1 ){
 
     <div id="ajouter">
         <form method="post" action="ajoutProduit.php" autocomplete="on" enctype="multipart/form-data">
-            <h1>Ajouter un Produit</h1> 
+            <h2>Ajouter un Produit</h2> 
             <p> 
              <label for="nomProduit" class="nomProduct" data-icon="u" >Nom du produit : </label>
              <input id="nomProduit" name="nomProd" required="required" type="text" placeholder=" Nom "/>
@@ -124,11 +127,33 @@ if (isset($_SESSION['status']) && $_SESSION['status'] >= 1 ){
         </form>
     </div>
 
+<!-- Ajouter -->
+
+    <div id="stock">
+        <form method="post" action="stockProduit.php" autocomplete="on">                         
+            <h2>Stock un Produit</h2> 
+            <p> 
+            <label for="nomProds" class="nomProds" data-icon="u" >Nom du Produit: </label>
+            <input id="nomProd" name="nomProd" required="required" type="text" placeholder="nom"/>
+            </p>
+            
+             <p> 
+            <label for="stockProds" class="stockProds" data-icon="u" >Stock du Produit: </label>
+            <input id="stockProds" name="stockProds" required="required" type="text" placeholder="stock"/>
+            </p>
+
+            <p class="supprimer button"> 
+            <input type="submit" value="Supprimer" /> 
+            </p>
+
+        </form>
+    </div>
+
     <!-- Supprimer -->
 
     <div id="supprimer">
         <form method="post" action="suppProduit.php" autocomplete="on">                         
-            <h1>Supprimer un Produit</h1> 
+            <h2>Supprimer un Produit</h2> 
             <p> 
             <label for="nomProds" class="nomProds" data-icon="u" >Nom du Produit: </label>
             <input id="nomProd" name="nomProd" required="required" type="text" placeholder="nom"/>
