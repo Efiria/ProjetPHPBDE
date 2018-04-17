@@ -3,8 +3,7 @@
 
 		<head>
 			<?php include "includes/header.php"; ?>
-            <script type="text/javascript" src="js_valider.js"></script>
-            <script type="text/javascript" src="jquery-3.3.1.js"></script>
+
 		</head>
 	<body>
 		       <div class="containers">
@@ -50,14 +49,13 @@
                                 </div>
 
                                 <div class="col-md-2">
-                                   <img src="img/thumbs-0.png" onClick=changelike(this) alt="Like" >
+                                   <img src="img/thumbs-0.png" alt="Like" >
                                 </div>
                                  <div class="col-md-2">
-                                    <img src="img/checked(1).png" onClick=changecheck(this) alt="Valider" >
+                                        <a href="script_event_inscription.php?id= <?php echo $answer['ID'];?>"> <img src="img/checked(1).png"alt="Valider"> </a>
                                 </div>                       
                                 </div> 
-                                <?php
-                            };?>
+                                <?php };?>
                         </div>
                     </div>
             </div>

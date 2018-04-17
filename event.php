@@ -3,8 +3,6 @@
 
 		<head>
 			<?php include "includes/header.php"; ?>
-            <script type="text/javascript" src="js_valider.js"></script>
-            <script type="text/javascript" src="jquery-3.3.1.js"></script>
 		</head>
 	<body>
 		       <div class="containers">
@@ -47,9 +45,26 @@
                                     echo $longueur_0; 
                                     ?>      
                                 </div>
-                               
+
                                 <div class="col-md-1">
-                                 <a href="incre_like.php?id= <?php echo $answer['ID'];?>"> <img src="img/thumbs-0.png" onClick=changelike(this) alt="Like"> </a>
+                                 <?php 
+
+                                $requete = $bdd->prepare("SELECT FK_Event, FK_Utilisateur FROM publications WHERE FK_Utilisateur = :id_user AND FK_Event = :id_event");
+                                $requete->bindValue(':id_event', $answer['ID'], PDO::PARAM_INT);
+                                $requete->bindValue(':id_user', $_SESSION['ID'], PDO::PARAM_INT);
+                                $requete->execute(); 
+
+                                $requete_0 = $bdd->prepare("SELECT SUM(likes) AS NBCHECK FROM publications WHERE FK_Event = :id_event");
+                                $requete_0->bindValue(':id_event', $answer['ID'], PDO::PARAM_INT);
+                                $requete_0->execute() or die('pb insert'); 
+
+                                $nbr_check = $requete_0->fetch(PDO::FETCH_ASSOC);
+                                echo $nbr_check['NBCHECK'];
+                                if ($liker = $requete->fetch()) { ?>
+                                    <a href="incre_like.php?id= <?php echo $answer['ID'];?>"> <img src="img/thumbs-1.png" alt="Like"> </a>
+                                <?php  } else { ?>
+                                   <a href="incre_like.php?id= <?php echo $answer['ID'];?>"> <img src="img/thumbs-0.png" alt="Like"> </a>
+                                <?php } ?>
                                 </div>
                                
                                 <?php if (isset($_SESSION['ID'])) { ?>
@@ -58,7 +73,7 @@
                                 </div>
                                 <?php } ?>
                                 <div class="col-md-1">
-                                    <img src="img/download-arrow.png" alt="Like" >
+                                    <img src="img/download-arrow.png" alt="Like">
                                 </div>
                                 <div class="col-md-1">
                                     <img src="img/settings.png" alt="Like">

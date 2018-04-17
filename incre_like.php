@@ -29,7 +29,7 @@
 	        		$inscription_delete = $bdd ->prepare($req);
 	        		$inscription_delete->bindValue(':id_event', $id_event, PDO::PARAM_INT);
 					$inscription_delete->bindValue(':id_user', $_SESSION['ID'], PDO::PARAM_INT);	
-	        		$inscription_delete->execute() or die ('pb insert');	
+	        		$inscription_delete->execute() or die ('pb insert');
 	        		header("Location: event.php");
 	        	}else{
 			        $req = "INSERT INTO publications ( likes,FK_Event, FK_Utilisateur) VALUES ( :likes,:idevent, :id)";
@@ -38,7 +38,9 @@
 					$inscription_insert->bindValue(':idevent',  $id_event, PDO::PARAM_INT);
 					$inscription_insert->bindValue(':id',  $_SESSION['ID'], PDO::PARAM_INT);
 					$inscription_insert->execute() or die ('pb insert');	
-	        	}
+					?> 
+	        		<?php
+					 } 
 
 				header("Location: event.php");
 	        ?>
@@ -48,4 +50,3 @@
         	<?php include("footer.php"); ?>
     	</footer>
 	</body>
-</body>

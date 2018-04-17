@@ -10,7 +10,7 @@
 
         	$bdd = new PDO('mysql:host=localhost;dbname=projet_test_bdd;charset=utf8', 'root', '');
 
-        	$requete = $bdd->prepare("SELECT FK_Event, FK_Utilisateur FROM publications WHERE FK_Utilisateur = :id_user AND FK_Event = :id_event");
+        	$requete = $bdd->prepare("SELECT FK_Event, FK_Utilisateur FROM inscrits WHERE FK_Utilisateur = :id_user AND FK_Event = :id_event");
 			$requete->bindValue(':id_event', $id_event, PDO::PARAM_INT);
 			$requete->bindValue(':id_user', $_SESSION['ID'], PDO::PARAM_INT);
 			$requete->execute();
