@@ -64,8 +64,6 @@ if (isset($_SESSION["panier"]))
     <h2>Articles recommandées</h2>
                          <div class="row">
                                 <?php
-                                    $bdd = new PDO('mysql:host=localhost; dbname=projet_test_bdd; charset=utf8', 'root','');
-                                    $products = $bdd->prepare('SELECT * FROM produits');
                                     $products -> execute();
                                         while ($answer = $products->fetch()){
                                         ?>
@@ -79,6 +77,9 @@ if (isset($_SESSION["panier"]))
                                             </div>
                                             <div class='descri'> 
                                                 <label>Description:</label> <?php echo $answer['description']; ?> 
+                                            </div>
+                                            <div class='cate'> 
+                                                <label>Catégorie:</label> <?php echo $answer['categorie']; ?> 
                                             </div>
                                             <div class='stock'> 
                                                 <label>Stock:</label>  <?php echo $answer['stock']; ?>      
@@ -150,8 +151,8 @@ if (isset($_SESSION['status']) && $_SESSION['status'] >= 1 ){
             <input id="stockProds" name="stockProds" required="required" type="text" placeholder="stock"/>
             </p>
 
-            <p class="supprimer button"> 
-            <input type="submit" value="Supprimer" /> 
+            <p class="stock button"> 
+            <input type="submit" value="Ajouter Stock" /> 
             </p>
 
         </form>

@@ -3,14 +3,14 @@
     $bdd = new PDO('mysql:host=localhost;dbname=projet_test_bdd;charset=utf8', 'root', '');
 
     $nomProd = $_POST['nomProd'];
-    $stockProd = $_POST['stockProd'];
+    $stockProd = $_POST['stockProds'];
     
-    $requete = $bdd->prepare("SELECT nom FROM produits WHERE nom = :nom ");
-    $requete->bindValue(':nom', $nomProd);
+    $requete = $bdd->prepare("SELECT * FROM produits WHERE nom = :nom ");
+    $requete->bindValue(':nom', $nomProd, PDO::PARAM_STR);
     $requete->execute();
 
 
-    if($r_nomProd = $requete->fetch())
+    if(!$r_nomProd = $requete->fetch())
     {
         echo "<script type='text/javascript'>alert('Ce produit n\'existe pas')</script>";
         
@@ -21,6 +21,6 @@
         $ajoutProd_insert->execute() or die ('pb insert');
     }
 
-    //header("Location: shop.php");	
+    header("Location: shop.php");	
     
 ?>
