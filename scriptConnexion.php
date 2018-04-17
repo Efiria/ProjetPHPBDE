@@ -23,7 +23,12 @@ if($inscription = $requete->fetch())
 	if ($answer = $status->fetch()){
 
 		$_SESSION['status'] = $answer['status'];
+		$_SESSION['ID'] = $answer['ID'];
+		$_SESSION['nom'] = $answer['nom'];
+		$_SESSION['prenom'] = $answer['prenom'];
 		$_SESSION['identifiant'] = $identifiant;
+		$_SESSION['email'] = $answer['email'];
+		$_SESSION['numero'] = $answer['numero'];
 	}
 
 	header("Location: index.php");

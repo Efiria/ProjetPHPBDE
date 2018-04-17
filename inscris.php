@@ -10,9 +10,9 @@
             
             
             <section>               
-                        <div id="register" class="animate form">
-                            <form  method="post" action="scriptInscription.php" autocomplete="on"> 
-                                <h2> Inscription </h2> 
+                        <div id="inscris" class="animate form">
+                            <form  method="post" action="scriptInscri.php" autocomplete="on"> 
+                                <h2> S'inscrire à l'évènement </h2> 
                                 
                                     <label for="usernamesignup" class="yourname" >Nom </label>
                                 <p> 
@@ -27,11 +27,6 @@
                                     <label for="idsignup" class="yourid" >Identifiant </label>
                                 <p>
                                     <input id="idsignup" name="identifiant" required="required" type="text"/>
-                                </p>
-
-                                    <label for="passwordsignup" class="yourpasswd"  >Mot de passe </label>
-                                <p>
-                                    <input id="passwordsignup" name="mdp" required="required" type="password"/>
                                 </p>
  
                                     <label for="emailsignup" class="youremail"  >Adresse email </label>
@@ -48,10 +43,6 @@
                                     <input type="submit" value="S'inscrire"/> 
                                 </p>
 
-                                <p class="change_link">  
-                                    Déjà inscrit ?
-                                    <a href="page_connexion.php"> Connexion </a>
-                                </p>
                             </form>
                         </div>
                         

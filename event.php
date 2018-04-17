@@ -3,6 +3,8 @@
 
 		<head>
 			<?php include "includes/header.php"; ?>
+            <script type="text/javascript" src="js_valider.js"></script>
+            <script type="text/javascript" src="jquery-3.3.1.js"></script>
 		</head>
 	<body>
 		       <div class="containers">
@@ -45,15 +47,18 @@
                                     echo $longueur_0; 
                                     ?>      
                                 </div>
-
+                               
                                 <div class="col-md-1">
-                                    <img src="img/thumbs-0.png" onClick=changelike(this) alt="Like" >
+                                 <a href="incre_like.php?id= <?php echo $answer['ID'];?>"> <img src="img/thumbs-0.png" onClick=changelike(this) alt="Like"> </a>
                                 </div>
+                               
+                                <?php if (isset($_SESSION['ID'])) { ?>
                                 <div class="col-md-1">
-                                    <img src="img/report.png" alt="Like">
+                                    <a href="page_inscris.php?id= <?php echo $answer['ID'];?>"> <img src="img/report.png" alt="Boutton Inscription"> </a>
                                 </div>
+                                <?php } ?>
                                 <div class="col-md-1">
-                                    <img src="img/download-arrow.png" onClick=changeimg(this) alt="Like" >
+                                    <img src="img/download-arrow.png" alt="Like" >
                                 </div>
                                 <div class="col-md-1">
                                     <img src="img/settings.png" alt="Like">
@@ -70,24 +75,6 @@
     <?php include("footer.php"); ?>
 	</footer>
 
-  <script type="text/javascript">
-
-
-function changeimg(myImage) {
- 
-            var ancimage = myImage.src;
- 
-            if( ancimage.substring(ancimage.lastIndexOf("/"), ancimage.length) == "/thumbs-0.png"){
-                myImage.src= ancimage.substring(0,ancimage.lastIndexOf("/"), ancimage.length)+"/thumbs-1.png";
- 
-             } 
-             else{
-                myImage.src= ancimage.substring(0,ancimage.lastIndexOf("/"), ancimage.length)+"/thumbs-0.png";
- 
- 
-             }
-        }
-</script>
 
 </html>
 
