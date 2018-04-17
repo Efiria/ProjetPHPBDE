@@ -16,16 +16,23 @@
 	}
     
     if (isset($_GET["valider"])){
-        echo $_SESSION['identifiant'] . "</br>";
+        $head = 'Commande de ';
+        $message = "Bonjour veuillez contacter l'utilisateur pour finir sa commande";
+        
+        $user = $_SESSION['identifiant'];
+        $requete_mail = $bdd->prepare('SELECT email FROM utilisateurs WHERE status = 1 ');
+        $requete_mail -> execute();
+        
+        while($answer = $requete_mail->fetch()){
+            mail($answer['email'], $head . $_SESSION['identifiant'], $message);
+        }
+        
+        $_SESSION['panier'] = null;
     }
     
 	?>
 </head>
 <body>
-    
-        <a href="panier.php?vider=1">Vider le panier</a>
-    </br>
-
  
 	<?php
 		//affichage
@@ -48,7 +55,9 @@
 		}
     
         if (isset($value) && $value ){
-            ?> <a href="panier.php?valider=1">Valider le panier</a> </br> 
+            ?> 
+            <a href="panier.php?vider=1">Vider le panier</a></br> </br> 
+            <a href="panier.php?valider=1">Valider le panier</a> </br> 
 
     
     <!-- Mise en place de PAYPAL -->
@@ -92,10 +101,13 @@
         }, '#paypal-button');
       </script>
 
-<?php    
-        
-    }else{
+<?php   
+        }else{
+            
             echo "Votre panier est vide";
+            ?>
+            </br>
+           <?php
         }
         
 ?>
