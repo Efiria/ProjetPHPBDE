@@ -26,7 +26,7 @@
 
 										<div class="animate form">
 		              					 	 <p id="test">
-												<input type="submit" value="Poster" onclick="myFunction()"/>
+												<input type="submit" value="Poster"/>
 		               					 	 </p>
 										</div>
 					            </form>
@@ -41,18 +41,4 @@
 	<footer class="copyright-wrapper">
    		 <?php include("footer.php"); ?>
 	</footer>
-
-	<script>
-	function myFunction() {
-		var session='<?PHP echo $_SESSION['status'];?>';
-		if(session=true)
-		{
-			var answer = "<?php require('scriptIdeabox.php')?>";
-			
-			alert(answer);
-	   
-		}
-	}
-</script>
-
 </html>

@@ -12,7 +12,7 @@
             <section>               
                         <div id="register" class="animate form">
                             <form  method="post" action="scriptInscription.php" autocomplete="on"> 
-                                <h1> Inscription </h1> 
+                                <h2> Inscription </h2> 
                                 
                                     <label for="usernamesignup" class="yourname" >Nom </label>
                                 <p> 

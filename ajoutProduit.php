@@ -40,9 +40,9 @@
         $req = "INSERT INTO produits (nom, prix, description, categorie, urlImage) VALUES ( :nom, :prix, :description, :categorie, :lien)";
         $ajoutProd_insert = $bdd ->prepare($req);
         $ajoutProd_insert->bindValue(':nom', $nomProd, PDO::PARAM_STR);
+        $ajoutProd_insert->bindValue(':prix',  $prixProd, PDO::PARAM_INT);
         $ajoutProd_insert->bindValue(':description', $descProd, PDO::PARAM_STR);
         $ajoutProd_insert->bindValue(':categorie', $cateProd, PDO::PARAM_STR);
-        $ajoutProd_insert->bindValue(':prix',  $prixProd, PDO::PARAM_INT);
         $ajoutProd_insert->bindValue(':lien',$fichier, PDO::PARAM_STR);
         $ajoutProd_insert->execute() or die ('pb insert');
     }

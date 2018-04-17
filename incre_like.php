@@ -37,7 +37,7 @@
 					$inscription_insert->bindValue(':likes', $likes, PDO::PARAM_STR);
 					$inscription_insert->bindValue(':idevent',  $id_event, PDO::PARAM_INT);
 					$inscription_insert->bindValue(':id',  $_SESSION['ID'], PDO::PARAM_INT);
-					$inscription_insert->execute() or die ('pb insert');
+					$inscription_insert->execute() or die ('pb insert');	
 	        	}
 
 				header("Location: event.php");
