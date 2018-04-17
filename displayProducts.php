@@ -47,8 +47,9 @@ if (isset($_GET["addProduct"]))
   	}
     //Ajout dans le panier
     array_push($_SESSION["panier"], $_GET["addProduct"]);
-    $pushPanier = $bdd->prepare("INSERT INTO commandes (idProduit) VALUES ( :idprod)");
-    $pushPanier->bindValue(':idprod', $_GET['addProduct'], PDO::PARAM_INT);
+    $pushPanier = $bdd->prepare("INSERT INTO commandes (NomProd, FK_Utilisateur) VALUES ( :idprod, :iduser)");
+    $pushPanier->bindValue(':idprod', $_GET['addProduct'], PDO::PARAM_STR);
+    $pushPanier->bindValue(':iduser', $_SESSION['ID'], PDO::PARAM_INT);
     $pushPanier -> execute() or die('error');
 }
 

@@ -7,12 +7,14 @@
     
     <?php
     $bdd = new PDO('mysql:host=localhost; dbname=projet_test_bdd; charset=utf8', 'root','');
-    
+    $id_user =$_SESSION["ID"]
     
     
 	if (isset($_GET["vider"]))
 	{
   		$_SESSION['panier'] = null;
+      $delete_p = $bdd->prepare('DELETE FROM commandes WHERE FK_Utilisateur = '$id_user' ')
+      $delete_p -> execute();
 	}
     
     if (isset($_GET["valider"])){
