@@ -15,6 +15,7 @@
 		{
 				$delete_p = $bdd->prepare("DELETE FROM commandes WHERE FK_Utilisateur = '$id_user' ");
 				$delete_p -> execute();
+				$_SESSION['panier'] = false;
 		}
 		
 		if (isset($_GET["valider"])){
@@ -29,7 +30,9 @@
 				while($answer = $requete_mail->fetch()){
 						mail($answer['email'], $head . $_SESSION['identifiant'], $message);
 				}
-				
+			$delete_p = $bdd->prepare("DELETE FROM commandes WHERE FK_Utilisateur = '$id_user' ");
+			$delete_p -> execute();
+			$_SESSION['panier'] = false;		
 		}
 		
 	?>
@@ -37,33 +40,23 @@
 <body>
  
 	<?php
-		//affichage
-		
-		if (isset($_SESSION["panier"]))
-		{
-			foreach ($_SESSION["panier"] as $value){
-					//echo $value . "</br>";
+
+		$products = $bdd->prepare("SELECT * FROM commandes WHERE '$id_user' = commandes.FK_Utilisateur ");
+		$products -> execute();
 								
-								$produits = $value;
-		
-								$products = $bdd->prepare("SELECT * FROM produits WHERE '$id_user' = commandes.FK_Utilisateur ");
-								$products -> execute();
-								
-								while($answer = $products->fetch()){
-										echo $answer['nom'];
-								}
-								
-				}
+		while($answer = $products->fetch()){
+			echo $answer['NomProd'];
+			?> </br> <?php
 		}
 		
-				if (isset($value) && $value ){
-						?> 
-						<a href="panier.php?vider=1">Vider le panier</a></br> </br> 
-						<a href="panier.php?valider=1">Valider le panier</a> </br> 
+		if($_SESSION['panier']){ ?> 
+
+		<a href="panier.php?vider=1">Vider le panier</a> </br></br> 
+		<a href="panier.php?valider=1">Valider le panier</a> </br> 
 
 		
 		<!-- Mise en place de PAYPAL -->
-</br>
+		</br>
 		<div id="paypal-button"></div>
 
 			<script>
@@ -103,15 +96,9 @@
 				}, '#paypal-button');
 			</script>
 
-<?php   
+			<?php   
 				}else{
-						
-						echo "Votre panier est vide";
-						?>
-						</br>
-					 <?php
-				}
-?>
-
-</body>
+					echo "Votre panier est vide"; 
+				} ?>
+	</body>
 </html>

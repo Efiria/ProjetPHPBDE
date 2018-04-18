@@ -1,7 +1,7 @@
 
-<h2 class=""> <a href="panier.php"> Panier</a></h2>
-
-<?php
+ <?php if (isset($_SESSION['ID'])) {
+    ?> <h2> <a href="panier.php"> Panier</a></h2> <?php
+}
 
 //Get product from bdd
 
@@ -65,9 +65,11 @@ if(isset($search)){
                     <div class='stock'> 
                         <label>Stock:</label>  <?php echo $answer['stock']; ?>      
                     </div> 
-                    <div class="ajout">
-                        <a href="shop.php?addProduct=<?php echo $answer['nom']?>">Ajouter au panier</a>
-                    </div>
+                    <?php if (isset($_SESSION['status'])) { ?>
+                        <div class="ajout">
+                            <a href="shop.php?addProduct=<?php echo $answer['nom']?>">Ajouter au panier</a>
+                        </div>
+                    <?php } ?>
                 </div>                      
         <?php 
             $count += 1; 
@@ -75,7 +77,8 @@ if(isset($search)){
             if ($count == 3) {
                 break;
             }
-        };?>
+        }
+        ?>
     </div>
 
     <h2>Articles recommandées</h2>
@@ -100,9 +103,11 @@ if(isset($search)){
                         <div class='stock'> 
                             <label>Stock:</label>  <?php echo $answer['stock']; ?>      
                         </div> 
+                        <?php if (isset($_SESSION['status'])) { ?>
                         <div class="ajout">
                             <a href="shop.php?addProduct=<?php echo $answer['nom']?>">Ajouter au panier</a>
                         </div>
+                    <?php } ?>
                 </div> <?php 
             };?> 
         </div>
@@ -115,6 +120,7 @@ if(isset($search)){
 if (isset($_GET["addProduct"]))
 {
     $nomProd = $_GET["addProduct"];
+    $_SESSION['panier'] = true;
 
     //Ajout dans le panier
     $pushPanier = $bdd->prepare("INSERT INTO commandes (NomProd, FK_Utilisateur) VALUES ( :idprod, :iduser)");
