@@ -7,9 +7,6 @@
 
 $bdd = new PDO('mysql:host=localhost; dbname=projet_test_bdd; charset=utf8', 'root','');
 
-$panier_count = 0;
-
-
 //Search zone
 
 ?>
@@ -34,28 +31,6 @@ if(isset($_POST['query'])){
            
 if(isset($search)){
     ?><a href="shop.php">enlever filtre <?php echo $search ?> </a> </br> <?php
-}
-
-
-//Create panier
-
-if (isset($_GET["addProduct"]))
-{
-	if (!isset($_SESSION["panier"]))
-  	{
-    	$_SESSION["panier"] = array();
-  	}
-    //Ajout dans le panier
-    array_push($_SESSION["panier"], $_GET["addProduct"]);
-    $pushPanier = $bdd->prepare("INSERT INTO commandes (NomProd, FK_Utilisateur) VALUES ( :idprod, :iduser)");
-    $pushPanier->bindValue(':idprod', $_GET['addProduct'], PDO::PARAM_STR);
-    $pushPanier->bindValue(':iduser', $_SESSION['ID'], PDO::PARAM_INT);
-    $pushPanier -> execute() or die('error');
-}
-
-if (isset($_SESSION["panier"]))
-{
-	$panier_count = sizeof($_SESSION["panier"]);
 }
 
 //Display Product 
@@ -94,6 +69,46 @@ if (isset($_SESSION["panier"]))
                         </div>
                     </div>
 <?php
+
+//ajout panier
+
+if (isset($_GET["addProduct"]))
+{
+    $nomProd = $_GET["addProduct"];
+
+    //Ajout dans le panier
+    $pushPanier = $bdd->prepare("INSERT INTO commandes (NomProd, FK_Utilisateur) VALUES ( :idprod, :iduser)");
+    $pushPanier->bindValue(':idprod', $_GET['addProduct'], PDO::PARAM_STR);
+    $pushPanier->bindValue(':iduser', $_SESSION['ID'], PDO::PARAM_INT);
+    $pushPanier -> execute() or die('error');
+
+    //stock -1
+    $selecStock = $bdd->prepare("SELECT stock, achat FROM produits WHERE nom = '$nomProd' ");
+    $selecStock ->execute();
+
+    while($answer_prod = $selecStock->fetch()){
+        $stockPanier = $bdd->prepare("UPDATE produits SET stock = :stockProd WHERE nom = '$nomProd' ");
+        if ($answer_prod['stock'] <= 0) {
+            ?> <script> alert('Ajout impossible')</script><?php
+        } else {
+            $stockprod = $answer_prod['stock'] -1;
+            echo $stockprod;
+            $stockPanier->bindValue(':stockProd', $stockprod, PDO::PARAM_INT);
+            $stockPanier ->execute();
+
+            //achat +1
+            $achatPanier = $bdd->prepare("UPDATE produits SET achat = :achatProd WHERE nom = '$nomProd' ");
+            $achatProd = $answer_prod['achat'] + 1;
+            echo $achatProd;
+            $achatPanier->bindValue(':achatProd', $achatProd, PDO::PARAM_INT);
+            $achatPanier ->execute();
+        }
+        
+    }
+
+}
+
+
 $products -> closeCursor();
 
 

@@ -10,16 +10,15 @@
 		$bdd = new PDO('mysql:host=localhost; dbname=projet_test_bdd; charset=utf8', 'root','');
 
 		$id_user = $_SESSION["ID"];
-		echo $id_user;
 		
 		if (isset($_GET['vider']))
 		{
-				$_SESSION['panier'] = null;
 				$delete_p = $bdd->prepare("DELETE FROM commandes WHERE FK_Utilisateur = '$id_user' ");
 				$delete_p -> execute();
 		}
 		
 		if (isset($_GET["valider"])){
+				//Envoi du mail
 				$head = 'Commande de ';
 				$message = "Bonjour veuillez contacter l'utilisateur pour finir sa commande";
 				
@@ -31,7 +30,6 @@
 						mail($answer['email'], $head . $_SESSION['identifiant'], $message);
 				}
 				
-				$_SESSION['panier'] = null;
 		}
 		
 	?>
@@ -44,15 +42,15 @@
 		if (isset($_SESSION["panier"]))
 		{
 			foreach ($_SESSION["panier"] as $value){
-					echo $value . "</br>";
+					//echo $value . "</br>";
 								
 								$produits = $value;
 		
-								$products = $bdd->prepare("SELECT * FROM produits WHERE id = '$produits' ");
+								$products = $bdd->prepare("SELECT * FROM produits WHERE '$id_user' = commandes.FK_Utilisateur ");
 								$products -> execute();
 								
 								while($answer = $products->fetch()){
-										echo $answer['prix'];
+										echo $answer['nom'];
 								}
 								
 				}
@@ -113,7 +111,6 @@
 						</br>
 					 <?php
 				}
-				
 ?>
 
 </body>
