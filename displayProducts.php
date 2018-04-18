@@ -40,8 +40,8 @@ if(isset($search)){
 
 //Display Product 
 ?>
-
-<div id="article">
+<div class="containers">
+    <div id="article">
     <h2>Articles les plus Vendus</h2>
         <div class="row">
             <?php
@@ -106,6 +106,7 @@ if(isset($search)){
                 </div> <?php 
             };?> 
         </div>
+</div>
 </div>
 <?php
 

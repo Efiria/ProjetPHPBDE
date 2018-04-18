@@ -108,17 +108,22 @@
                             };?>
                     </div>
                     
+                    <?php $count = 0; ?>
+
                     <div id="article">
                         <h2>Articles recommandées</h2>
                          <div class="row">
                                 <?php
                                     $bdd = new PDO('mysql:host=localhost; dbname=projet_test_bdd; charset=utf8', 'root','');
-                                    $products = $bdd->prepare('SELECT * FROM produits');
+                                    $products = $bdd->prepare('SELECT * FROM produits ORDER BY achat DESC');
                                     $products -> execute();
                                         while ($answer = $products->fetch()){
                                         ?>
                                         <div class='col-xs-4 col-md-4'>
                                             <img src= <?php echo $answer['urlImage'] ?> , class='prodpic' height='100' lenght='100'/>
+                                            <div class='nom'>
+                                                <label>Nom:</label> <?php echo $answer['nom']; ?>
+                                            </div>
                                             <div class='prix'>
                                                 <label>Prix:</label> <?php echo $answer['prix']; ?> €
                                             </div>
