@@ -18,16 +18,21 @@ $bdd = new PDO('mysql:host=localhost; dbname=projet_test_bdd; charset=utf8', 'ro
 </br>
 
 <?php
+$count = 0;
+
 if(isset($_POST['query'])){
     $search = $_POST['query'];
     
-    $products = $bdd->prepare("SELECT * FROM produits WHERE categorie = '$search' ");
+    $products = $bdd->prepare("SELECT * FROM produits WHERE categorie = '$search' ORDER BY ID");
     $products -> execute();
     
 }else {
-    $products = $bdd->prepare('SELECT * FROM produits');
+    $products = $bdd->prepare('SELECT * FROM produits ORDER BY ID');
     $products -> execute();
 }
+
+    $products_max = $bdd->prepare("SELECT * FROM produits ORDER BY achat DESC");
+    $products_max -> execute();
            
 if(isset($search)){
     ?><a href="shop.php">enlever filtre <?php echo $search ?> </a> </br> <?php
@@ -37,37 +42,71 @@ if(isset($search)){
 ?>
 
 <div id="article">
-    <h2>Articles recommandées</h2>
-                         <div class="row">
-                                <?php
-                                    $products -> execute();
-                                        while ($answer = $products->fetch()){
-                                        ?>
-                                        <div class='col-xs-4 col-md-4'>
-                                            <img src= <?php echo $answer['urlImage'] ?> , class='prodpic' height='100' lenght='100'/>
-                                            <div class='nom'>
-                                                <label>Nom:</label> <?php echo $answer['nom']; ?>
-                                            </div>
-                                            <div class='prix'>
-                                                <label>Prix:</label> <?php echo $answer['prix']; ?> €
-                                            </div>
-                                            <div class='descri'> 
-                                                <label>Description:</label> <?php echo $answer['description']; ?> 
-                                            </div>
-                                            <div class='cate'> 
-                                                <label>Catégorie:</label> <?php echo $answer['categorie']; ?> 
-                                            </div>
-                                            <div class='stock'> 
-                                                <label>Stock:</label>  <?php echo $answer['stock']; ?>      
-                                            </div> 
-                                            <div class="ajout">
-                                                 <a href="shop.php?addProduct=<?php echo $answer['nom']?>">Ajouter au panier</a>
-                                            </div>
-                                            </div>                      
-   
-                               <?php };?> 
-                        </div>
+    <h2>Articles les plus Vendus</h2>
+        <div class="row">
+            <?php
+            $products -> execute();
+            while ($answer = $products_max->fetch()){
+            ?>
+                <div class='col-xs-4 col-md-4'>
+                    <img src= <?php echo $answer['urlImage'] ?> , class='prodpic' height='100' lenght='100'/>
+                    <div class='nom'>
+                        <label>Nom:</label> <?php echo $answer['nom']; ?>
                     </div>
+                    <div class='prix'>
+                        <label>Prix:</label> <?php echo $answer['prix']; ?> €
+                    </div>
+                    <div class='descri'> 
+                        <label>Description:</label> <?php echo $answer['description']; ?> 
+                    </div>
+                    <div class='cate'> 
+                        <label>Catégorie:</label> <?php echo $answer['categorie']; ?> 
+                    </div>
+                    <div class='stock'> 
+                        <label>Stock:</label>  <?php echo $answer['stock']; ?>      
+                    </div> 
+                    <div class="ajout">
+                        <a href="shop.php?addProduct=<?php echo $answer['nom']?>">Ajouter au panier</a>
+                    </div>
+                </div>                      
+        <?php 
+            $count += 1; 
+
+            if ($count == 3) {
+                break;
+            }
+        };?>
+    </div>
+
+    <h2>Articles recommandées</h2>
+        <div class="row">
+            <?php
+            $products -> execute();
+            while ($answer = $products->fetch()){ ?>
+                <div class='col-xs-4 col-md-4'>
+                    <img src= <?php echo $answer['urlImage'] ?> , class='prodpic' height='100' lenght='100'/>
+                        <div class='nom'>
+                            <label>Nom:</label> <?php echo $answer['nom']; ?>
+                        </div>
+                        <div class='prix'>
+                            <label>Prix:</label> <?php echo $answer['prix']; ?> €
+                        </div>
+                        <div class='descri'> 
+                            <label>Description:</label> <?php echo $answer['description']; ?> 
+                        </div>
+                        <div class='cate'> 
+                          <label>Catégorie:</label> <?php echo $answer['categorie']; ?> 
+                        </div>
+                        <div class='stock'> 
+                            <label>Stock:</label>  <?php echo $answer['stock']; ?>      
+                        </div> 
+                        <div class="ajout">
+                            <a href="shop.php?addProduct=<?php echo $answer['nom']?>">Ajouter au panier</a>
+                        </div>
+                </div> <?php 
+            };?> 
+        </div>
+</div>
 <?php
 
 //ajout panier
