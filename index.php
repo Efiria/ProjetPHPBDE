@@ -89,23 +89,29 @@
                                  <div class="features">
                                         <span>
                                          <?php 
+                                         if (isset($_SESSION['ID'])) {
                                             $requete = $bdd->prepare("SELECT FK_Event, FK_Utilisateur FROM publications WHERE FK_Utilisateur = :id_user AND FK_Event = :id_event");
                                             $requete->bindValue(':id_event', $answer['ID'], PDO::PARAM_INT);
                                             $requete->bindValue(':id_user', $_SESSION['ID'], PDO::PARAM_INT);
                                             $requete->execute(); 
-
+                                        }
                                             $requete_0 = $bdd->prepare("SELECT SUM(likes) AS NBCHECK FROM publications WHERE FK_Event = :id_event");
                                             $requete_0->bindValue(':id_event', $answer['ID'], PDO::PARAM_INT);
                                             $requete_0->execute() or die('pb insert'); 
                                             $nbr_check = $requete_0->fetch(PDO::FETCH_ASSOC); ?>
 
                                            <span class="nbr_like"> <?php echo $nbr_check['NBCHECK']; ?> likes</span>
-                                           <?php if ($liker = $requete->fetch()) { ?>
+                                        <?php if (isset($_SESSION['ID'])) {
+                                            if ($liker = $requete->fetch()) { ?>
                                                 <a href="incre_like.php?id= <?php echo $answer['ID'];?>"> <img src="img/thumbs-1.png" alt="Like"> </a>
                                             <?php  } else { ?>
                                                <a href="incre_like.php?id= <?php echo $answer['ID'];?>"> <img src="img/thumbs-0.png" alt="Like"> </a>
-                                            <?php } ?>
+                                            <?php } 
+                                            }else{
+                                              ?> <img src="img/thumbs-0.png" alt="Like" title="Connectez vous pour aimer cet évènement"> <?php
+                                            } ?>
                                         </span>
+
                                       <?php if (isset($_SESSION['ID'])) { ?>
                                         <span>
                                             <?php   
@@ -115,9 +121,9 @@
                                             $requete->execute(); 
 
                                              if ($inscri = $requete->fetch()) { ?>
-                                                <a href="page_inscris.php?id= <?php echo $answer['ID'];?>"> <img src="img/report(1).png" alt="Like"> </a>
+                                                <a href="page_inscris.php?id= <?php echo $answer['ID'];?>"> <img src="img/report(1).png" alt="Like" title="Se désinscrire"> </a>
                                             <?php  } else { ?>
-                                               <a href="page_inscris.php?id= <?php echo $answer['ID'];?>"> <img src="img/report.png" alt="Like"> </a>
+                                               <a href="page_inscris.php?id= <?php echo $answer['ID'];?>"> <img src="img/report.png" alt="Like" title="S'inscrire"> </a>
                                             <?php } ?>
                                         </span>
                                         <?php } ?>
@@ -136,10 +142,11 @@
                                         break;
                                     }
                             };?>
-                    </div>
+                            <p class="seemore">
+                                <a href="event.php"> <button>Voir Plus</button></a> 
+                            </p>
 
                     <?php $count=0; ?>
-                    
                     <div id="article">
                         <h2>Articles recommandées</h2>
                          <div class="row">
@@ -151,9 +158,6 @@
                                         ?>
                                         <div class='col-xs-4 col-md-4'>
                                             <img src= <?php echo $answer['urlImage'] ?> , class='prodpic' height='100' lenght='100'/>
-                                            <div class='nom'>
-                                                <label>Nom:</label> <?php echo $answer['nom']; ?>
-                                            </div>
                                             <div class='prix'>
                                                 <label>Prix:</label> <?php echo $answer['prix']; ?> €
                                             </div>
@@ -172,6 +176,9 @@
                                         }
                                 };?> 
                         </div>
+                        <p class="seemore">
+                             <a href="shop.php"> <button>Commander</button></a> 
+                        </p>
                     </div>
             </div>
     </body>
