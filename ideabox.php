@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-	<html>
+    <html>
 
-		<head>
-			<?php include "includes/header.php"; ?>
+        <head>
+            <?php include "includes/header.php"; ?>
 
-		</head>
-	<body>
-		       <div class="containers">
+        </head>
+    <body>
+               <div class="containers">
                     <div id="AddEvent">
-                    	<h2>Nos idées</h2>
-                    	 <p class="addButton"> 
-                    		<a href="addEvent.php"> <button>Proposer</button></a> 
-     					</p>
+                        <h2>Nos idées</h2>
+                         <p class="addButton"> 
+                            <a href="addEvent.php"> <button>Proposer</button></a> 
+                        </p>
                          <div class="row">
                             <?php
 
@@ -48,20 +48,50 @@
                                     ?>      
                                 </div>
 
-                                <div class="col-md-2">
-                                   <img src="img/thumbs-0.png" alt="Like" >
-                                </div>
-                                 <div class="col-md-2">
-                                        <a href="script_event_inscription.php?id= <?php echo $answer['ID'];?>"> <img src="img/checked(1).png"alt="Valider"> </a>
-                                </div>                       
+                                <div class="features">
+                                        <span>
+                                         <?php 
+                                            $requete = $bdd->prepare("SELECT FK_Event, FK_Utilisateur FROM publications WHERE FK_Utilisateur = :id_user AND FK_Event = :id_event");
+                                            $requete->bindValue(':id_event', $answer['ID'], PDO::PARAM_INT);
+                                            $requete->bindValue(':id_user', $_SESSION['ID'], PDO::PARAM_INT);
+                                            $requete->execute(); 
+
+                                            $requete_0 = $bdd->prepare("SELECT SUM(likes) AS NBCHECK FROM publications WHERE FK_Event = :id_event");
+                                            $requete_0->bindValue(':id_event', $answer['ID'], PDO::PARAM_INT);
+                                            $requete_0->execute() or die('pb insert'); 
+                                            $nbr_check = $requete_0->fetch(PDO::FETCH_ASSOC); ?>
+
+                                           <span class="nbr_like"> <?php echo $nbr_check['NBCHECK']; ?> likes</span>
+                                           <?php if ($liker = $requete->fetch()) { ?>
+                                                <a href="incre_like.php?id= <?php echo $answer['ID'];?>"> <img src="img/thumbs-1.png" alt="Like"> </a>
+                                            <?php  } else { ?>
+                                               <a href="incre_like.php?id= <?php echo $answer['ID'];?>"> <img src="img/thumbs-0.png" alt="Like"> </a>
+                                            <?php } ?>
+                                        </span>
+                                        <?php if (isset($_SESSION['ID'])) { ?>
+                                        <?php } ?>
+                                        <span>
+                                            <?php 
+                                            $requete = $bdd->prepare("SELECT FK_Event, FK_Utilisateur FROM bai WHERE FK_Utilisateur = :id_user");
+                                            $requete->bindValue(':id_user', $_SESSION['ID'], PDO::PARAM_INT);
+                                            $requete->execute(); ?>
+                                           <?php if ($confirm = $requete->fetch()) { ?>
+                                                <a href="script_event_inscription.php?id= <?php echo $answer['ID'];?>"> <img src="img/checked.png"alt="Valider" title="Cliquer pour valider"> </a>
+                                            <?php  } else { ?>
+                                              <a href="script_event_inscription.php?id= <?php echo $answer['ID'];?>"> <img src="img/checked(1).png"alt="Valider" title="Cliquer pour valider"> </a>
+                                            <?php } ?>
+                                        </span>
+                                     </div>
                                 </div> 
-                                <?php };?>
+                                <?php
+                            };?>
                         </div>
                     </div>
             </div>
-	</body>
+    </body>
 
-	<footer class="copyright-wrapper">
+    <footer class="copyright-wrapper">
     <?php include("footer.php"); ?>
-	</footer>
-</html>	
+    </footer>
+</html> 
+

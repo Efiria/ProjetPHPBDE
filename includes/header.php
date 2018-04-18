@@ -22,7 +22,7 @@
 			<nav id="select"> 
 				<a href="index.php">Accueil</a>
 				<a href="ideabox.php">Boite a idees</a>
-				<a href="ideabox.php">Evènements</a>
+				<a href="event.php">Evènements</a>
 				<a href="shop.php">Boutique</a>
 				<?php if(!isset($_SESSION['connecte'])){ ?>
 					<a href="page_connexion.php">Connexion</a>

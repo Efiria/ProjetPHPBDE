@@ -24,4 +24,4 @@ function changecheck(myImage_check) {
              else{
                 myImage_check.src= ancimage.substring(0,ancimage.lastIndexOf("/"), ancimage.length)+"/checked(1).png";
              }
-        }
+    }
